@@ -32,7 +32,7 @@ mongoose
     console.log(err);
   });
 
-app.use("/users", users);
+app.use('/users', users);
 app.use('/posts', posts);
 
 const port = process.env.PORT || 5000;

@@ -16,25 +16,31 @@ router.get("/test", (req, res) => res.json({ msg: "Posts Works" }));
 // @route   GET  posts
 // @desc    Get posts
 // @access  Private
-router.get("/", passport.authenticate("jwt", { session: false }),
-(req, res) => {
-  Post.find()
-    .sort({ date: -1 })
-    .then(posts => res.json(posts))
-    .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
-});
+router.get(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.find()
+      .sort({ date: -1 })
+      .then(posts => res.json(posts))
+      .catch(err => res.status(404).json({ nopostsfound: "No posts found" }));
+  }
+);
 
 // @route   GET api/posts/:id
 // @desc    Get post by id
 // @access  Public
-router.get("/:id",passport.authenticate("jwt", { session: false }),
-(req, res)=> {
-  Post.findById(req.params.id)
-    .then(post => res.json(post))
-    .catch(err =>
-      res.status(404).json({ nopostfound: "No post found with that ID" })
-    );
-});
+router.get(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Post.findById(req.params.id)
+      .then(post => res.json(post))
+      .catch(err =>
+        res.status(404).json({ nopostfound: "No post found with that ID" })
+      );
+  }
+);
 
 // @route   POST /posts
 // @desc    Create post
@@ -54,17 +60,12 @@ router.post(
     const newPost = new Post({
       title: req.body.title,
       text: req.body.text,
-      text1:req.body.text1
+      text1: req.body.text1
     });
 
     newPost.save().then(post => res.json(post));
   }
 );
-
-// @route   PUT /posts
-// @desc    Update post
-// @access  Private
-  
 
 // @route   DELETE api/posts/:id
 // @desc    Delete post
@@ -80,4 +81,5 @@ router.delete(
       })
       .catch(err => res.status(404).json({ postnotfound: "No post found" }));
   }
-);module.exports = router;
+);
+module.exports = router;
