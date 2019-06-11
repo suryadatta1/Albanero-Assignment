@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { logoutUser } from '../../actions/authActions';
 
+
 class Navbar extends Component {
   onLogoutClick(e) {
     e.preventDefault();
@@ -16,12 +17,17 @@ class Navbar extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
+          <Link className="nav-link" to="/feed">
+            Records
+          </Link>
+        </li>
+       
+        <li className="nav-item">
           <a
             href=""
             onClick={this.onLogoutClick.bind(this)}
             className="nav-link"
           >
-           {' '}
             Logout
           </a>
         </li>
@@ -61,10 +67,6 @@ class Navbar extends Component {
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/Records">
-                  {' '}
-                  Records
-                </Link>
               </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
@@ -84,4 +86,6 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps, { logoutUser })(Navbar);
+export default connect(mapStateToProps, { logoutUser})(
+  Navbar
+);
