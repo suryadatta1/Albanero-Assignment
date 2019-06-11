@@ -4,8 +4,7 @@ const Schema = mongoose.Schema;
 // Create Schema
 const PostSchema = new Schema({
   title: {
-    type: String,
-    required: true
+    type: String  
   },
     text: {
     type: String,

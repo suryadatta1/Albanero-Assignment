@@ -28,10 +28,9 @@ class PostForm extends Component {
     const { user } = this.props.auth;
 
     const newPost = {
-      title: this.state.title,
       text: this.state.text,
       name: user.name,
-
+      avatar: user.avatar
     };
 
     this.props.addPost(newPost);
@@ -52,19 +51,13 @@ class PostForm extends Component {
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
                 <TextAreaFieldGroup
-                  placeholder="Create a record title"
-                  name="title"
-                  value={this.state.title}
-                  onChange={this.onChange}
-                  error={errors.title}
-                  />
-                  <TextAreaFieldGroup
                   placeholder="Create a record"
                   name="text"
                   value={this.state.text}
                   onChange={this.onChange}
                   error={errors.text}
                 />
+
               </div>
               <button type="submit" className="btn btn-dark">
                 Submit

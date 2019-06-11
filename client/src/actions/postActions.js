@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 import {
   ADD_POST,
@@ -8,13 +8,13 @@ import {
   GET_POST,
   POST_LOADING,
   DELETE_POST
-} from './types';
+} from "./types";
 
 // Add Post
 export const addPost = postData => dispatch => {
   dispatch(clearErrors());
   axios
-    .post('/posts', postData)
+    .post("/posts", postData)
     .then(res =>
       dispatch({
         type: ADD_POST,
@@ -33,7 +33,7 @@ export const addPost = postData => dispatch => {
 export const getPosts = () => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get('/posts')
+    .get("posts")
     .then(res =>
       dispatch({
         type: GET_POSTS,
@@ -43,7 +43,7 @@ export const getPosts = () => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_POSTS,
-        payload: err.res.data
+        payload: null
       })
     );
 };
@@ -52,7 +52,7 @@ export const getPosts = () => dispatch => {
 export const getPost = id => dispatch => {
   dispatch(setPostLoading());
   axios
-    .get(`/posts/${id}`)
+    .get(`posts/${id}`)
     .then(res =>
       dispatch({
         type: GET_POST,
@@ -62,7 +62,7 @@ export const getPost = id => dispatch => {
     .catch(err =>
       dispatch({
         type: GET_POST,
-        payload: err.res.data
+        payload: null
       })
     );
 };
@@ -70,7 +70,7 @@ export const getPost = id => dispatch => {
 // Delete Post
 export const deletePost = id => dispatch => {
   axios
-    .delete(`/api/posts/${id}`)
+    .delete(`posts/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_POST,
@@ -84,8 +84,6 @@ export const deletePost = id => dispatch => {
       })
     );
 };
-
-
 
 // Set loading state
 export const setPostLoading = () => {
